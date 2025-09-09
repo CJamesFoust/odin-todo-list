@@ -4,9 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin - To-Do List</title>
-    <script src="./index.js" defer></script>
   </head>
   <body>
+    <header class="p-3 border-bottom">
+      <div class="container">
+        <div
+          class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+        >
+          <ul
+            class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+          >
+            <li>
+              <a href="#" class="nav-link px-2 link-body-emphasis logo"
+                >Hello, User</a
+              >
+            </li>
+          </ul>
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <input
+              type="search"
+              class="form-control"
+              placeholder="Search..."
+              aria-label="Search"
+            />
+          </form>
+          <div class="dropdown text-end">
+            <a
+              href="#"
+              class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="https://github.com/mdo.png"
+                alt="mdo"
+                width="32"
+                height="32"
+                class="rounded-circle"
+              />
+            </a>
+            <ul class="dropdown-menu text-small" style="">
+              <li><a class="dropdown-item" href="#">New project...</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="#">Sign out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
     <main>
       <div class="flex-shrink-0 p-3 bg-white" style="width: 280px">
         <a
@@ -20,20 +67,17 @@
         >
         <ul class="list-unstyled ps-0">
           <li class="mb-1">
-            <button
-              class="btn align-items-center rounded collapsed">
+            <button class="btn align-items-center rounded collapsed">
               Add task
             </button>
           </li>
           <li class="mb-1">
-            <button
-              class="btn align-items-center rounded collapsed">
+            <button class="btn align-items-center rounded collapsed">
               Search
             </button>
           </li>
           <li class="mb-1">
-            <button
-              class="btn align-items-center rounded collapsed">
+            <button class="btn align-items-center rounded collapsed">
               Today
             </button>
           </li>
@@ -42,7 +86,8 @@
               class="btn btn-toggle align-items-center rounded collapsed"
               data-bs-toggle="collapse"
               data-bs-target="#my-lists-collapse"
-              aria-expanded="false">
+              aria-expanded="false"
+            >
               My lists
             </button>
             <div class="collapse" id="my-lists-collapse">
@@ -59,7 +104,8 @@
               class="btn btn-toggle align-items-center rounded collapsed"
               data-bs-toggle="collapse"
               data-bs-target="#completed-collapse"
-              aria-expanded="false">
+              aria-expanded="false"
+            >
               Completed
             </button>
             <div class="collapse" id="completed-collapse">
@@ -76,7 +122,8 @@
               class="btn btn-toggle align-items-center rounded collapsed"
               data-bs-toggle="collapse"
               data-bs-target="#deleted-collapse"
-              aria-expanded="false">
+              aria-expanded="false"
+            >
               Deleted
             </button>
             <div class="collapse" id="deleted-collapse">
@@ -90,6 +137,88 @@
           </li>
           <li class="border-top my-3"></li>
         </ul>
+      </div>
+      <div class="container content my-4">
+        <form
+          class="px-4 py-3 container-fluid bg-white rounded-3"
+          style="max-width: 600px"
+        >
+          <legend>Add task</legend>
+          <div class="row g-2">
+            <div class="col-12 row g-1">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="floatingInputValue"
+                  placeholder=""
+                />
+                <label for="floatingInputValue">New task</label>
+              </div>
+            </div>
+            <div class="row col-12 g-1">
+              <div class="form-floating">
+                <textarea
+                  class="form-control"
+                  placeholder="Description of your task"
+                  id="floatingTextarea2"
+                  style="height: 125px"
+                ></textarea>
+                <label for="floatingTextarea2">Description</label>
+              </div>
+            </div>
+            <div class="col-12 row g-1">
+              <div class="col-6">
+                <div class="form-floating">
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="floatingInputValue"
+                    placeholder=""
+                  />
+                  <label for="floatingInputValue">Due date</label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-floating">
+                  <select
+                    class="form-select"
+                    id="floatingSelect"
+                    aria-label="Select task priority"
+                  >
+                    <option value="low" selected>Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                  <label for="floatingSelect">Priority</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 row g-1">
+              <div class="col-12">
+                <div class="form-floating">
+                  <select
+                    class="form-select"
+                    id="floatingSelect"
+                    aria-label="Select list to add task to"
+                  >
+                    <option value="create-new-list" selected>Create new list</option>
+                    <option value="list-1">placeholder list 1</option>
+                    <option value="list-2">placeholder list 2</option>
+                  </select>
+                  <label for="floatingSelect">Add to list</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 row g-1 my-3">
+              <div class="col-12 d-flex flex-row-reverse">
+                <button type="button" class="btn btn-outline-primary">
+                  Create
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </main>
   </body>
