@@ -34,4 +34,14 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    alias: {
+      components: path.resolve(__dirname, "src/components"),
+      header: path.resolve(__dirname, "src/components/header"),
+      main: path.resolve(__dirname, "src/components/main"),
+      AddTask: path.resolve(__dirname, "src/components/main/AddTask"),
+      Sidebar: path.resolve(__dirname, "src/components/main/Sidebar"),
+      Content: path.resolve(__dirname, "src/components/main/Content")
+    },
+  },
 };

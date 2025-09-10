@@ -2,11 +2,8 @@ import "./styles.css";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createToDoList } from "./todoList";
+import { h, render } from "preact";
+import App from "./App";
 
-const testToDo = createToDoList(
-  "This is a title",
-  "This is a description",
-  new Date("2024-09-01"),
-  "High",
-  ["test", "test 2", "test 3"]
-);
+
+render(h(App), document.querySelector("#root"));

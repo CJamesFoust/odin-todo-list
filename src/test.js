@@ -1,5 +1,3 @@
-import { isValidDate, formatDate } from "./helpers";
-
 const isValidPriority = function (value) {
   const allowed = ["high", "medium", "low"];
   return typeof value === "string" && allowed.includes(value.toLowerCase());
@@ -33,7 +31,7 @@ const isValidTaskList = function (arr) {
   return isValid;
 }
 
-export const createTask = function (
+const createTask = function (
   initialTaskName,
   initialDesc,
   initialDueDate,
@@ -190,7 +188,7 @@ export const createTask = function (
   return task;
 };
 
-export const createToDoList = function (initialTitle, initialTaskList, initialId) {
+const createToDoList = function (initialTitle, initialTaskList, initialId) {
   let _title = initialTitle;
   let _taskList = Array.isArray(initialTaskList) ? initialTaskList : [initialTaskList];
   let _id = initialId ? initialId :  crypto.randomUUID();
