@@ -1,31 +1,43 @@
-import { h } from "preact";
+import { Fragment, h } from "preact";
 import htm from "htm";
-import { useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 
 const html = htm.bind(h);
 
-const AddTask = ({ onCreate }) => {
+const AddTask = ({ onCreate, lists }) => {
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     dueDate: "",
     priority: "low",
-    list: "create-new-list",
+    list: "",
+    listName: "",
   });
+
+  const [listName, setListName] = useState("");
+
+  useEffect(() => {}, [listName]);
+  useEffect(() => {}, [lists]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
+    if (e.target.id === "list") {
+      setListName(e.target.value);
+    }
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleSubmit = () => {
     onCreate(formData);
+    setListName("");
     setFormData({
       name: "",
       description: "",
       dueDate: "",
       priority: "low",
-      list: "create-new-list",
+      list: "",
+      listName: "",
     });
   };
 
@@ -103,15 +115,32 @@ const AddTask = ({ onCreate }) => {
                 value=${formData.list}
                 onInput=${handleChange}
               >
-                <option value="create-new-list" selected>
-                  Create new list
-                </option>
-                <option value="list-1">placeholder list 1</option>
-                <option value="list-2">placeholder list 2</option>
+                ${lists.length === 0 ? html`<${Fragment}></${Fragment}>` : (
+                  lists.map((list) => {
+                     return html`<option key=${list.id} value=${list.id}>${list.title}</option>`}))
+                    }
+                <option value="create-new-list">Create new list</option>
               </select>
               <label for="floatingSelect">Add to list</label>
             </div>
           </div>
+          ${listName !== "create-new-list"
+            ? html`<${Fragment}></${Fragment}>`
+            : html`<div class="col-12 row g-1">
+                <div class="col-12">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="listName"
+                      value=${formData.listName}
+                      onInput=${handleChange}
+                      placeholder=""
+                    />
+                    <label for="listName">New list name</label>
+                  </div>
+                </div>
+              </div>`}
         </div>
         <div class="col-12 row g-1 my-3">
           <div class="col-12 d-flex flex-row-reverse">

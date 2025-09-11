@@ -27,24 +27,20 @@ const isValidTaskList = function (arr) {
     console.warn(`Supplied task list, ${arr}, is not of type Array`);
   } else if (arr.length < 1) {
     isValid = false;
-    console.warn(`Supplied task list, ${arr}, does not have any values in array`);
+    console.warn(
+      `Supplied task list, ${arr}, does not have any values in array`
+    );
   }
 
   return isValid;
-}
+};
 
-export const createTask = function (
-  initialTaskName,
-  initialDesc,
-  initialDueDate,
-  initialPriority,
-  initialList
-) {
-  let _taskName = initialTaskName;
-  let _desc = initialDesc;
-  let _dueDate = initialDueDate;
-  let _priority = initialPriority;
-  let _list = initialList;
+export const createTask = function (taskData) {
+  let _taskName = taskData.name;
+  let _desc = taskData.description;
+  let _dueDate = taskData.dueDate;
+  let _priority = taskData.priority;
+  let _listId = taskData.list;
   let _completed = false;
   let _deleted = false;
 
@@ -53,7 +49,7 @@ export const createTask = function (
     description: _desc,
     dueDate: _dueDate,
     priority: _priority,
-    list: _list,
+    listId: _listId,
     completed: _completed,
     deleted: _deleted,
   };
@@ -141,16 +137,16 @@ export const createTask = function (
     configurable: false,
   });
 
-  Object.defineProperty(task, "list", {
+  Object.defineProperty(task, "listId", {
     get() {
-      return _list;
+      return _listId;
     },
-    set(newList) {
-      if (!isValidList(newList)) {
+    set(newListId) {
+      if (typeof newListId !== "string") {
         console.warn(`List supplied, ${newList}, is not a valid list.`);
         return;
       } else {
-        _list = newList;
+        _listId = newListId;
       }
     },
     enumerable: true,
@@ -190,15 +186,23 @@ export const createTask = function (
   return task;
 };
 
-export const createToDoList = function (initialTitle, initialTaskList, initialId) {
+export const createToDoList = function (
+  initialTitle,
+  initialTaskList,
+  initialId
+) {
   let _title = initialTitle;
-  let _taskList = Array.isArray(initialTaskList) ? initialTaskList : [initialTaskList];
-  let _id = initialId ? initialId :  crypto.randomUUID();
+  let _taskList = isValidTaskList(initialTaskList)
+    ? initialTaskList
+    : [];
+  let _id = initialId ? initialId : crypto.randomUUID();
+ 
 
   const todoList = {
     title: _title,
     id: _id,
     taskList: _taskList,
+    // addNewTask: addNewTask,
   };
 
   Object.defineProperty(todoList, "title", {
@@ -242,5 +246,27 @@ export const createToDoList = function (initialTitle, initialTaskList, initialId
     configurable: false,
   });
 
+  todoList.addNewTask = function (newTask) {
+    // implement task validation at some point
+    // if (!isValidTask(newTask)) {
+    //   console.warn("Invalid task format.");
+    //   return;
+    // }
+
+    _taskList.push(newTask);
+  }
+
+
   return todoList;
 };
+
+
+export const handleCreateTaskAndAssociations = function (taskData, lists, setLists) {
+  if (taskData.list === "create-new-list") {
+    let newTask = createTask(taskData);
+    let newList = createToDoList(taskData.listName);
+    newTask.listId = newList.id;
+    newList.addNewTask(newTask);
+    setLists((prev) => ([ ...prev, newList ]));
+  }
+}

@@ -4,14 +4,11 @@ import AddTask from "../AddTask/AddTask";
 
 const html = htm.bind(h);
 
-const Content = ({ view, onCreate }) => {
-    const handleCreateTask = (taskData) => {
-        console.log(`Task create: `, taskData);
-    };
+const Content = ({ view, onCreate, lists }) => {
     
     return html`
     <${Fragment}>
-        ${view === 'add-task' && html`<${AddTask} onCreate=${ onCreate } />`}
+        ${view === 'add-task' && html`<${AddTask} onCreate=${ onCreate } lists=${ lists } />`}
         ${view === 'search-task' && html`<div>Search Tasks</div>`}
         ${view === 'todays-tasks' && html`<div>Todays Tasks</div>`}
     </${Fragment}>

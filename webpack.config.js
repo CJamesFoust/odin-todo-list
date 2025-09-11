@@ -41,7 +41,11 @@ module.exports = {
       main: path.resolve(__dirname, "src/components/main"),
       AddTask: path.resolve(__dirname, "src/components/main/AddTask"),
       Sidebar: path.resolve(__dirname, "src/components/main/Sidebar"),
-      Content: path.resolve(__dirname, "src/components/main/Content")
+      Content: path.resolve(__dirname, "src/components/main/Content"),
+      FullScreenModal: path.resolve(
+        __dirname,
+        "src/components/FullScreenModal"
+      ),
     },
   },
 };

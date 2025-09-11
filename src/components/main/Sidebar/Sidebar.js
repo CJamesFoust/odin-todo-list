@@ -3,7 +3,7 @@ import htm from "htm";
 
 const html = htm.bind(h);
 
-const Sidebar = ({ setView }) => {
+const Sidebar = ({ setView, lists }) => {
     return html`<div class="flex-shrink-0 p-3 bg-white" style="width: 280px" id="sidebar">
         <a
           href=""
@@ -41,46 +41,9 @@ const Sidebar = ({ setView }) => {
             </button>
             <div class="collapse" id="my-lists-collapse">
               <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">List 1</a></li>
-                <li><a href="#" class="link-dark rounded">List 2</a></li>
-                <li><a href="#" class="link-dark rounded">List 3</a></li>
-                <li><a href="#" class="link-dark rounded">List 4</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button
-              class="btn btn-toggle align-items-center rounded collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#completed-collapse"
-              aria-expanded="false"
-            >
-              Completed
-            </button>
-            <div class="collapse" id="completed-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">List 1</a></li>
-                <li><a href="#" class="link-dark rounded">List 2</a></li>
-                <li><a href="#" class="link-dark rounded">List 3</a></li>
-                <li><a href="#" class="link-dark rounded">List 4</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button
-              class="btn btn-toggle align-items-center rounded collapsed"
-              data-bs-toggle="collapse"
-              data-bs-target="#deleted-collapse"
-              aria-expanded="false"
-            >
-              Deleted
-            </button>
-            <div class="collapse" id="deleted-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark rounded">List 1</a></li>
-                <li><a href="#" class="link-dark rounded">List 2</a></li>
-                <li><a href="#" class="link-dark rounded">List 3</a></li>
-                <li><a href="#" class="link-dark rounded">List 4</a></li>
+              ${lists.length === 0 ? html`<li><a href="#" class="link-dark rounded" style="pointer-events: none;">No lists created</a></li>` : lists.map((list) => {
+                return html`<li key=${list.id}><a href="#" class="link-dark rounded">${list.title}</a></li>`
+              })}
               </ul>
             </div>
           </li>
