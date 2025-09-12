@@ -41,10 +41,12 @@ export const createTask = function (taskData) {
   let _dueDate = taskData.dueDate;
   let _priority = taskData.priority;
   let _listId = taskData.list;
+  let _id = crypto.randomUUID();
   let _completed = false;
   let _deleted = false;
 
   const task = {
+    id: _id,
     name: _taskName,
     description: _desc,
     dueDate: _dueDate,
@@ -53,6 +55,14 @@ export const createTask = function (taskData) {
     completed: _completed,
     deleted: _deleted,
   };
+  
+  Object.defineProperty(task, "id", {
+    get() {
+      return _id;
+    },
+    enumerable: true,
+    configurable: false,
+  });
 
   Object.defineProperty(task, "name", {
     get() {
@@ -192,11 +202,8 @@ export const createToDoList = function (
   initialId
 ) {
   let _title = initialTitle;
-  let _taskList = isValidTaskList(initialTaskList)
-    ? initialTaskList
-    : [];
+  let _taskList = isValidTaskList(initialTaskList) ? initialTaskList : [];
   let _id = initialId ? initialId : crypto.randomUUID();
- 
 
   const todoList = {
     title: _title,
@@ -254,19 +261,22 @@ export const createToDoList = function (
     // }
 
     _taskList.push(newTask);
-  }
-
+  };
 
   return todoList;
 };
 
-
-export const handleCreateTaskAndAssociations = function (taskData, lists, setLists) {
+export const handleCreateTaskAndAssociations = function (
+  taskData,
+  lists,
+  setLists
+) {
   if (taskData.list === "create-new-list") {
     let newTask = createTask(taskData);
     let newList = createToDoList(taskData.listName);
     newTask.listId = newList.id;
     newList.addNewTask(newTask);
-    setLists((prev) => ([ ...prev, newList ]));
+    setLists((prev) => [...prev, newList]);
+    console.log(newList);
   }
-}
+};

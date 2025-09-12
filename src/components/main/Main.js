@@ -7,7 +7,7 @@ import { useState } from "preact/hooks";
 const html = htm.bind(h);
 
 const Main = ({ onCreate, lists }) => {
-    const [currentView, setCurrentView] = useState('add-task');
+    const [currentView, setCurrentView] = useState('lists');
 
     return html`<main id="main">
       <${Sidebar} setView=${setCurrentView} lists=${ lists } />

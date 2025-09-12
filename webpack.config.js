@@ -46,6 +46,7 @@ module.exports = {
         __dirname,
         "src/components/FullScreenModal"
       ),
+      Lists: path.resolve(__dirname, "src/components/main/Lists"),
     },
   },
 };

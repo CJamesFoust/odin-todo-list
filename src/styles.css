@@ -91,3 +91,50 @@ main {
     width: 50%;
     margin-inline: auto;
 }
+
+.form-check-input[class*="priority-"][type=checkbox] {
+    background-color: var(--checkbox-priority-opacity-color);
+    border: 2px solid var(--checkbox-priority-color);
+    border-radius: 50%;
+}
+
+.form-check-input[class*="priority-"]:checked {
+    background-color: var(--checkbox-priority-color);
+    border-color: var(--checkbox-priority-color);
+}
+
+.form-check-input[class*="priority-"]:focus {
+    box-shadow: 0 0 0 .25rem var(--checkbox-priority-opacity-color);
+    outline: 0;
+}
+
+.form-check-input.priority-high[type=checkbox] {
+    --checkbox-priority-color: rgb(253, 13, 13);
+    --checkbox-priority-opacity-color: rgba(253, 13, 13, .25);
+}
+
+.form-check-input.priority-medium[type=checkbox] {
+    --checkbox-priority-color: rgb(255, 191, 0);
+    --checkbox-priority-opacity-color: rgba(255, 191, 0, .25)
+}
+
+.form-check-input.priority-low {
+    --checkbox-priority-color: rgb(158, 193, 171);
+    --checkbox-priority-opacity-color: rgba(158, 193, 171, .25)
+}
+
+.hide {
+    display: none;
+}
+
+.collapse:not(.show) {
+    display: none !important;
+}
+
+a[aria-expanded="true"] .bi-chevron-double-right {
+    transform: rotate(90deg);
+}
+
+.container .list-container:last-child {
+    border-bottom: none !important;
+}
